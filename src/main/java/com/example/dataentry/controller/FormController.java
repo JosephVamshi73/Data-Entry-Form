@@ -13,7 +13,7 @@ public class FormController {
 
     private final List<UserEntry> entries = new ArrayList<>();
 
-    @GetMapping("/")
+    @GetMapping("/form")
     public String showForm(Model model) {
         model.addAttribute("userEntry", new UserEntry());
         return "form";
