@@ -1,0 +1,306 @@
+/* style.css
+   Polished, modern UI for the data-entry app.
+   Drop into src/main/resources/static/style.css
+   Tweak --accent / --primary to match your brand.
+*/
+
+/* Import a clean font */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
+
+:root{
+  --bg-1: #0f1724;       /* deep slate */
+  --bg-2: #0b3a4b;       /* teal */
+  --accent: #ff6b6b;     /* coral accent */
+  --muted: #69707a;
+  --card-bg: rgba(255,255,255,0.9);
+  --glass: rgba(255,255,255,0.06);
+  --radius: 14px;
+  --max-width: 900px;
+}
+
+/* subtle animated background */
+body{
+  margin: 0;
+  min-height: 100vh;
+  font-family: 'Poppins', system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  color: #182026;
+  background: linear-gradient(120deg, var(--bg-1) 0%, #0f4c5c 35%, #ffeef0 100%);
+  background-size: 300% 300%;
+  animation: bgShift 14s ease infinite;
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+  padding: 36px 20px;
+}
+
+@keyframes bgShift {
+  0%   { background-position: 0% 50%; }
+  50%  { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* centered content area */
+.container{
+  max-width: var(--max-width);
+  margin: 28px auto;
+  background: linear-gradient(180deg, rgba(255,255,255,0.92), rgba(250,250,250,0.88));
+  border-radius: var(--radius);
+  box-shadow: 0 20px 40px rgba(2,6,23,0.45), 0 2px 8px rgba(10,10,10,0.08);
+  padding: 32px;
+  position: relative;
+  overflow: hidden;
+}
+
+/* decorative header (logo badge + title) */
+.header {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  margin-bottom: 18px;
+}
+
+.logo-badge{
+  width: 64px;
+  height: 64px;
+  border-radius: 12px;
+  background: linear-gradient(135deg, rgba(255,255,255,0.06), rgba(255,255,255,0.02));
+  box-shadow: 0 6px 18px rgba(11,46,60,0.12);
+  display: grid;
+  place-items: center;
+  font-weight: 700;
+  color: var(--bg-2);
+  font-size: 20px;
+  border: 1px solid rgba(11,46,60,0.06);
+}
+
+.title-wrap h1{
+  margin: 0;
+  font-size: 20px;
+  letter-spacing: -0.2px;
+  color: #053340;
+}
+
+.title-wrap p{
+  margin: 2px 0 0;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+/* main layout: form left / preview right on wide screens */
+.split {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 22px;
+  align-items: start;
+}
+
+/* wider screens -> 2 columns */
+@media (min-width: 880px){
+  .split {
+    grid-template-columns: 1fr 420px;
+  }
+}
+
+/* form card */
+.form-card {
+  background: linear-gradient(180deg, var(--card-bg), #ffffff);
+  padding: 22px;
+  border-radius: 12px;
+  border: 1px solid rgba(10,10,10,0.03);
+}
+
+/* group fields into 2-column grid */
+.form-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 14px;
+}
+
+@media (min-width: 640px){
+  .form-grid { grid-template-columns: 1fr 1fr; }
+  /* make Title full-width on small gap if preferred: */
+  .full-row { grid-column: 1 / -1; }
+}
+
+/* form labels and inputs */
+.form-field {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-field label {
+  font-weight: 600;
+  font-size: 13px;
+  color: #374151;
+  margin-bottom: 8px;
+}
+
+.form-field input[type="text"],
+.form-field input[type="number"],
+.form-field select,
+.form-field textarea {
+  width: 100%;
+  padding: 12px 14px;
+  border-radius: 10px;
+  border: 1px solid rgba(7,16,26,0.08);
+  background: linear-gradient(180deg, #ffffff, #fbfdff);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.8);
+  outline: none;
+  font-size: 14px;
+  transition: box-shadow 180ms ease, border-color 180ms ease, transform 120ms ease;
+}
+
+/* nicer number input appearance */
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
+
+/* focus state */
+.form-field input:focus,
+.form-field textarea:focus,
+.form-field select:focus {
+  border-color: rgba(255,107,107,0.9);
+  box-shadow: 0 8px 24px rgba(11,46,60,0.08), 0 0 0 4px rgba(255,107,107,0.06);
+  transform: translateY(-1px);
+}
+
+/* subtle required marker */
+.required {
+  display: inline-block;
+  margin-left: 8px;
+  color: var(--accent);
+  font-weight: 700;
+  font-size: 12px;
+}
+
+/* action row */
+.actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  margin-top: 8px;
+}
+
+/* fancy gradient button with micro animation */
+.btn {
+  position: relative;
+  padding: 12px 20px;
+  border-radius: 12px;
+  font-weight: 700;
+  border: none;
+  cursor: pointer;
+  color: white;
+  background: linear-gradient(90deg, var(--accent), #ff8a5b 60%);
+  box-shadow: 0 8px 22px rgba(255,107,107,0.18);
+  transition: transform 160ms ease, box-shadow 160ms ease;
+  overflow: hidden;
+}
+
+.btn:active { transform: translateY(1px) scale(0.995); }
+.btn:hover  { box-shadow: 0 12px 28px rgba(255,107,107,0.22); }
+
+/* small secondary button style */
+.btn-ghost {
+  background: transparent;
+  border: 1px solid rgba(3,19,25,0.06);
+  color: #0f1724;
+  padding: 10px 14px;
+  border-radius: 10px;
+}
+
+/* preview / confirm column */
+.preview {
+  position: relative;
+  top: 0;
+}
+
+.preview .card {
+  background: linear-gradient(180deg, rgba(247,250,252,0.9), #ffffff);
+  padding: 18px;
+  border-radius: 12px;
+  border: 1px solid rgba(2,8,23,0.03);
+}
+
+.preview .latest {
+  border-left: 6px solid var(--accent);
+  padding-left: 12px;
+  margin-bottom: 16px;
+}
+
+/* table style for previous entries */
+.table-wrap {
+  overflow: auto;
+}
+
+table.entries {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+  background: transparent;
+}
+
+table.entries th {
+  text-align: left;
+  padding: 10px 12px;
+  background: linear-gradient(90deg, rgba(3,19,25,0.9), rgba(3,19,25,0.8));
+  color: white;
+  font-weight: 600;
+  border-top-left-radius: 8px;
+}
+
+table.entries td {
+  padding: 10px 12px;
+  border-bottom: 1px dashed rgba(15,21,34,0.06);
+  vertical-align: middle;
+}
+
+table.entries tr:hover td {
+  background: linear-gradient(90deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+  transform: translateX(0);
+}
+
+/* empty state */
+.empty {
+  color: var(--muted);
+  font-size: 14px;
+  padding: 12px;
+  text-align: center;
+}
+
+/* error message */
+.error {
+  color: #b81d13;
+  background: rgba(184,29,19,0.06);
+  padding: 10px 12px;
+  border-radius: 8px;
+  font-weight: 600;
+  margin-bottom: 12px;
+}
+
+/* small helper: nice separators */
+.sep {
+  height: 1px;
+  background: linear-gradient(90deg,#0000,rgba(10,10,10,0.04),#0000);
+  margin: 18px 0;
+}
+
+/* responsive tweaks */
+@media (max-width: 520px){
+  .container{ padding: 20px; }
+  .logo-badge { width: 52px; height: 52px; font-size: 18px; }
+  .actions { justify-content: center; }
+}
+
+/* tiny flourish: floating accent circle (decorative) */
+.container::before{
+  content: "";
+  position: absolute;
+  width: 280px;
+  height: 280px;
+  right: -80px;
+  top: -110px;
+  background: radial-gradient(circle at 30% 30%, rgba(255,107,107,0.12), transparent 30%),
+              radial-gradient(circle at 70% 70%, rgba(7,98,130,0.06), transparent 30%);
+  filter: blur(18px);
+  pointer-events: none;
+  transform: rotate(6deg);
+}
+

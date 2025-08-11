@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Data Entry Form</title>
+    <link rel="stylesheet" th:href="@{/style.css}" />
+</head>
+<body>
+<div class="container">
+    <h2>Enter Your Info</h2>
+    <p class="error" th:if="${error}" th:text="${error}"></p>
+    <form th:action="@{/submit}" th:object="${userEntry}" method="post">
+        <label>Name*: <input type="text" th:field="*{name}" /></label><br>
+        <label>Age: <input type="number" th:field="*{age}" /></label><br>
+        <label>Title*: <input type="text" th:field="*{title}" /></label><br>
+        <label>Hometown: <input type="text" th:field="*{hometown}" /></label><br>
+        <button type="submit">Submit</button>
+    </form>
+</div>
+</body>
+</html>

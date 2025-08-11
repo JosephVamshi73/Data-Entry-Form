@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Confirmation</title>
+    <link rel="stylesheet" th:href="@{/style.css}" />
+</head>
+<body>
+<div class="container">
+    <h2>Submission Confirmation</h2>
+    <div class="card" th:if="${latest}">
+        <p><strong>Name:</strong> <span th:text="${latest.name}"></span></p>
+        <p><strong>Age:</strong> <span th:text="${latest.age}"></span></p>
+        <p><strong>Title:</strong> <span th:text="${latest.title}"></span></p>
+        <p><strong>Hometown:</strong> <span th:text="${latest.hometown}"></span></p>
+    </div>
+
+    <h3>All Entries</h3>
+    <table>
+        <tr>
+            <th>Name</th><th>Age</th><th>Title</th><th>Hometown</th>
+        </tr>
+        <tr th:each="e : ${entries}">
+            <td th:text="${e.name}"></td>
+            <td th:text="${e.age}"></td>
+            <td th:text="${e.title}"></td>
+            <td th:text="${e.hometown}"></td>
+        </tr>
+    </table>
+</div>
+</body>
+</html>
