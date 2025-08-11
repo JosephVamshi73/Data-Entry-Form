@@ -18,6 +18,10 @@ public class FormController {
         model.addAttribute("userEntry", new UserEntry());
         return "form";
     }
+    @GetMapping("/")
+public String index() {
+    return "index";
+}
 
     @PostMapping("/submit")
     public String submitForm(@ModelAttribute UserEntry userEntry, Model model) {
